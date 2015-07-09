@@ -47,26 +47,15 @@
 {% endif %}
 {% endblock %}
 <link href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed"/>
-<<<<<<< HEAD
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,800italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="/theme/uikit.min.css">
 <link rel="stylesheet" href="/theme/search.min.css">
-=======
-<link href='//fonts.googleapis.com/css?family=Open+Sans:800italic' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.15.0/css/uikit.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.15.0/css/components/search.min.css">
->>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 <link rel="stylesheet" href="/theme/css/tipuesearch.css">
 <link rel="stylesheet" href="/theme/css/solarized.css">
 <link rel="stylesheet" href="/theme/css/main.css">
 
-<<<<<<< HEAD
 <script src="/theme/html5shiv.min.js"></script>
-=======
-<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
->>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -98,22 +87,15 @@
     
         <div class="uk-width-medium-1-5 uk-hidden-small">
             
-<<<<<<< HEAD
             {% if DISPLAY_SEARCH != False %}
-=======
->>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
             <div class="uk-panel uk-panel-box">
                 <form class="uk-search" action="search.html" data-uk-search>
                     <input class="uk-search-field tipue_search" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
                 </form>
             </div>
 
-<<<<<<< HEAD
            {% endif %}
-           <div class="uk-panel uk-panel-box">
-=======
             <div class="uk-panel uk-panel-box">
->>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
                 <ul class="uk-nav uk-nav-side">
                     <li class="uk-nav-header">Categories</li>
                     {% for cat, _ in categories %}
@@ -176,29 +158,20 @@
         <div class="mg-author uk-panel">
             <p>{{ FOOTER }}</p>
 
-<<<<<<< HEAD
-=======
             <p>Powered by <a href="http://blog.getpelican.com">Pelican</a>.<br class="uk-visible-small"> Theme <a href="https://github.com/lucachr/pelican-mg">mg</a> by <a href="https://github.com/lucachr">Luca Chiricozzi</a>.</p>
->>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
         </div>
     </div> 
 </footer>
 
 <div id="mg-offcanvas" class="uk-offcanvas">
     <div class="uk-offcanvas-bar">
-<<<<<<< HEAD
             {% if DISPLAY_SEARCH != False %}
-=======
 
->>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
         <form class="uk-search" action="search.html" data-uk-search>
             <input class="uk-search-field" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
         </form>
 
-<<<<<<< HEAD
             {% endif %}
-=======
->>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
         <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
             <li class="uk-nav-header">Categories</li>
             {% for cat, _ in categories %}
@@ -220,17 +193,10 @@
     </div>
 </div>
 
-<<<<<<< HEAD
 <script src="/theme/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 <script src="/theme/uikit.min.js"></script>
 <script src="/theme/search.min.js"></script>
-=======
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.15.0/js/uikit.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.15.0/js/components/search.min.js"></script>
->>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 <script src="/theme/js/jquery.sticky-kit.js"></script>
 <script src="/theme/js/tipuesearch_set.js"></script>
 <script src="/theme/js/tipuesearch.js"></script>
