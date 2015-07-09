@@ -1,14 +1,19 @@
 html {
+<<<<<<< HEAD
   font: 400 14px / 20px "Open Sans", "Oswald", "Helvetica Neue",Helvetica,Arial,sans-serif !important; }
 
 #disqus_thread {
   padding-top: 40px; }
+=======
+  font: 400 14px / 20px "Oswald", "Helvetica Neue",Helvetica,Arial,sans-serif; }
+>>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 
 a {
   color: #33b5e5; }
   a:hover {
     color: #0099cc; }
 
+<<<<<<< HEAD
 .uk-article {
   padding-bottom: 20px; }
 
@@ -16,6 +21,8 @@ a {
   border-color: #f1f1fe;
   border-width: 3px; }
 
+=======
+>>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 .uk-navbar-brand {
   text-transform: uppercase; }
 
@@ -42,10 +49,17 @@ a {
   color: #444; }
 
 .uk-nav-side > li.uk-active > a {
+<<<<<<< HEAD
   background: #99dcfe; }
 
 .uk-pagination > .uk-active > span {
   background: #99dcfe; }
+=======
+  background: #28D1B2; }
+
+.uk-pagination > .uk-active > span {
+  background: #28D1B2; }
+>>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 
 .uk-icon-medium {
   margin-right: 0.3em; }
@@ -77,7 +91,11 @@ a {
 
 .mg-header {
   padding: 1em 0;
+<<<<<<< HEAD
   background-color: #99dcfe; }
+=======
+  background-color: #39B39D; }
+>>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 
 .mg-brand {
   font-family: "Open Sans", sans-serif;

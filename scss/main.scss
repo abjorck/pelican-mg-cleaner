@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 $baseGreen: #99dcfe;
 $accentGreen: #99dcfe;
+=======
+$baseGreen: #39B39D;
+$accentGreen: #28D1B2;
+>>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 $feedOrange: #FF6600;
 $twitterBlue: #00B0ED;
 $facebookBlue: #3B5999;
@@ -13,6 +18,7 @@ $ancorOver: #0099cc;
 // Base style
 
 html {
+<<<<<<< HEAD
     font: 400 14px / 20px "Open Sans", "Oswald", "Helvetica Neue",Helvetica,Arial,sans-serif !important; 
 }
 body {
@@ -20,6 +26,9 @@ body {
 
 #disqus_thread {
 	padding-top: 40px;
+=======
+    font: 400 14px / 20px "Oswald", "Helvetica Neue",Helvetica,Arial,sans-serif;
+>>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 }
 
 a {
@@ -30,6 +39,7 @@ a {
 }
 
 // uikit override
+<<<<<<< HEAD
 .uk-article {
     padding-bottom: 20px;
 }
@@ -38,6 +48,8 @@ a {
     border-color: #f1f1fe;
     border-width: 3px;
 }
+=======
+>>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 
 .uk-navbar-brand {
     text-transform: uppercase;

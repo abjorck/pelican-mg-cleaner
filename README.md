@@ -92,7 +92,11 @@ The StatCounter security code for the project.
 Enable share buttons, boolean.
 
 **SOCIAL**  
+<<<<<<< HEAD
 A list of tutples (icon, URL). The icons are from [Font Awesome]
+=======
+A list of tuples (icon, URL). The icons are from [Font Awesome]
+>>>>>>> 5171f8719690dfe0bb7bfd2b6de428f15868602f
 (http://fortawesome.github.io/Font-Awesome/). The suffix "-square" is removed 
 in the footer icons of the small screen layout.   
 e.g.   
@@ -165,7 +169,6 @@ This is the settings file for Dev's Bytes.
     DISQUS_SITENAME = "devsbytes"
     SC_PROJECT = '10224955'
     SC_SECURITY = '1f2cc438'
-
 ```
 
 License
