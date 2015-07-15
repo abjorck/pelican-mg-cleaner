@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ tag|capitalize }}{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+<div class="uk-width-medium-4-5">
+<h1>Taggat med: {{ tag }}</h1>
+<br><br>
+        {% for article in articles %}
+
+        <article class="uk-article">
+            <a href="{{ SITEURL }}/{{ article.url }}" class="uk-article-title uk-link-muted mg-list-title">{{ article.title }}</a>
+            <p class="uk-article-meta">
+                <time datetime="{{ article.date.strftime('%Y-%m-%d') }}">{{ article.locale_date }}</time>
+            </p>
+            <p>{{ ' '.join(article.content.split(' ')[0:75])|striptags }}...</p>
+        </article>
+        
+        {% endfor %}
+</div>
+{% include 'common_seo.html' %}
+{% endblock %}
+

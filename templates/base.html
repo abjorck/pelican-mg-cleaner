@@ -71,7 +71,7 @@
             <div class="mg-tagline uk-navbar-content uk-hidden-small">{% if SITESUBTITLE %}{{ SITESUBTITLE }}{% endif %}</div>
             <a class="uk-navbar-toggle uk-visible-small" href="#mg-offcanvas" data-uk-offcanvas></a>
             <a class="mg-brand uk-navbar-brand uk-navbar-center uk-visible-small" href="{{ SITEURL }}">{% if ALT_NAME %}{{ ALT_NAME }}{% else %}{{ SITENAME }}{% endif %}</a>
-
+            <div class="mg-tagline uk-navbar-content uk-visible-small">{% if SITESUBTITLE %}{{ SITESUBTITLE }}{% endif %}</div>
         </div>
     </div>
 </header>
@@ -97,12 +97,12 @@
            {% endif %}
             <div class="uk-panel uk-panel-box">
                 <ul class="uk-nav uk-nav-side">
-                    <li class="uk-nav-header">Categories</li>
+                    <li class="uk-nav-header">Kategorier</li>
                     {% for cat, _ in categories %}
                     <li {% if cat == category %}class="uk-active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
                     {% endfor %}
                     {% if DISPLAY_PAGES_ON_MENU != False %}
-                    <li class="uk-nav-header">Pages</li>
+                    <li class="uk-nav-header">Sidor</li>
                     
                     {% for p in PAGES %}
                     <li {% if p == page %}class="uk-active"{% endif %}>
@@ -112,24 +112,27 @@
                     
                     {% endif %}
 
-                    <li class="uk-nav-divider"></li>
-                    <li {% if page_name == 'archives' %}class="uk-active"{% endif %}><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+                    <li {% if page_name == 'archives' %}class="uk-active"{% endif %}><a href="{{ SITEURL }}/archives.html">Arkiv</a></li>
                 </ul>
             </div>
 
             <div class="uk-panel uk-panel-box">
-                <h3 class="uk-panel-title">Receive Updates</h3>
-                <a rel="alternate" type="application/atom+xml" href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" class="mg-feed"><i class="uk-icon-rss uk-icon-medium"></i> ATOM</a>
-            </div>
+                <ul class="uk-nav uk-nav-side">
+                <li class="uk-nav-header">Prenumerera</li>
+                <li class="mg-feed"><a rel="alternate" type="application/atom+xml" href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" class="mg-feed"><i class="uk-icon-rss uk-icon-medium"></i> ATOM</a></li>
+                <li class="mg-feed"><a rel="alternate" type="application/rss+xml" href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" class="mg-feed"><i class="uk-icon-rss uk-icon-medium"></i> RSS</a></li>
+            </ul></div>
             
             {% if SOCIAL %}
             <div class="uk-panel uk-panel-box">
-                <h3 class="uk-panel-title">Contacts</h3>
+                <ul class="uk-nav uk-nav-side">
+                <li class="uk-nav-header">Kontakta</li>
                 {% for icon, link in SOCIAL %}
-                <a class="mg-icon-link" href="{{ link }}">
+		<li><a class="mg-icon-link" href="{{ link }}">
                     <i class="uk-icon-{{ icon }} uk-icon-medium"></i>
-                </a>
+                </a></li>
                 {% endfor %}
+		</ul>
             </div>
             {% endif %}
 
@@ -155,11 +158,6 @@
             {% endif %}
         </div>
 
-        <div class="mg-author uk-panel">
-            <p>{{ FOOTER }}</p>
-
-            <p>Powered by <a href="http://blog.getpelican.com">Pelican</a>.<br class="uk-visible-small"> Theme <a href="https://github.com/lucachr/pelican-mg">mg</a> by <a href="https://github.com/lucachr">Luca Chiricozzi</a>.</p>
-        </div>
     </div> 
 </footer>
 
@@ -173,12 +171,12 @@
 
             {% endif %}
         <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
-            <li class="uk-nav-header">Categories</li>
+            <li class="uk-nav-header">Kategorier</li>
             {% for cat, _ in categories %}
             <li {% if cat == category %}class="uk-active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
             {% endfor %}
             {% if DISPLAY_PAGES_ON_MENU != False %}
-            <li class="uk-nav-header">Pages</li>        
+            <li class="uk-nav-header">Sidor</li>        
             {% for p in PAGES %}
             <li {% if p == page %}class="uk-active"{% endif %}>
                 <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
@@ -188,7 +186,7 @@
             {% endif %}
 
             <li class="uk-nav-divider"></li>
-            <li><a href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Archives</a></li>
+            <li><a href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Arkiv</a></li>
         </ul>
     </div>
 </div>

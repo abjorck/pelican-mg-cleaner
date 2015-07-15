@@ -1,5 +1,5 @@
-$baseGreen: #99dcfe;
-$accentGreen: #99dcfe;
+$baseGreen: #586BFF;
+$accentGreen: #586BFF;
 $feedOrange: #FF6600;
 $twitterBlue: #00B0ED;
 $facebookBlue: #3B5999;
@@ -27,6 +27,13 @@ a {
     &:hover {
         color: $ancorOver;
     }
+}
+
+h2 {
+	color: #444;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: 400;
 }
 
 // uikit override
