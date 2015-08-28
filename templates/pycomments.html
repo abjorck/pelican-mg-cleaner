@@ -1,0 +1,17 @@
+<script src="/theme/sugar.min.js"></script>
+
+<div id="pycomments"><!-- comments! --></div>
+<script>
+	$.ajax( '{{ PYCOMMENTS_URL }}/comment/{{ article.url }}').success(function(data){
+		console.log(data);
+		var el = $('#pycomments');
+		data.forEach(function(val) {
+			if (val.author) {
+				el.append('<span>'+Date.create(val.timestamp*1000).relative()+', '+val.author+': '+ val.content+' </span><br>');
+			}
+		});
+
+	}).error(function(x, str, y){
+		console.log('ajax error '+str);
+	})
+</script>

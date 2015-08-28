@@ -38,20 +38,28 @@
         <p class="uk-article-lead" itemprop="description">{{ article.summary|striptags }}</p>
         <section itemprop="articleBody">{{ article.content }}</section>
        
-Tags:
+           {% if article.photo_gallery %} 
+            {%   include 'gallery.html' %}
+            {% endif %}
+
         {% if article.tags %}
+Taggar:
         {% for tag in article.tags %}
         <span itemprop="keywords">
                 <a class="meta-tag" href="{{ SITEURL }}/{{ tag.url }}" rel="tag">{{ tag }}</a>
         </span>
         {% endfor %}
         {% endif %} 
+
+
+    {% if PYCOMMENTS %} 
+    {%   include 'pycomments.html' %}
+    {% endif %}
+    
 	<hr class="uk-article-divider">
     </article>
 
-    {% if article.photo_gallery %} 
-    {%   include 'gallery.html' %}
-    {% endif %}
+
     
     {% if DISQUS_SITENAME %}
     <div id="disqus_thread"></div>
