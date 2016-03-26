@@ -1,0 +1,103 @@
+<script>
+var servertime_diff = 0;
+        $(document).ready(function() {
+            getLatest();
+        });
+
+
+        function relative_custom(value, unit, ms, loc) {
+              if(ms.abs() > (12).hour() && value == 1 && unit == 4) {
+                return 'i går';
+              }
+              if (ms.abs() < (1).minute()) {
+                return 'nyss';
+              }
+        }
+        function getLatest() {
+            $.ajax( {url: '{{ PYCOMMENTS_URL }}/static/latest.json', cache:false}).done(function(data, stat, jqxhr){
+                var localtime = Date.now();
+                var servtime = Date.parse(jqxhr.getResponseHeader('Date'));
+                servertime_diff = localtime - servtime;
+                comments_data = data.filter(function(d){ return d.author && d.content && d.article });
+
+                if (comments_data.length) {
+                    var box = $('#comments-latest-box');
+                    var container = box.find('#comments-latest-container')
+                    var el = $('#comment-li-element');
+                    console.log("got latest comments: "+comments_data.length);
+                    comments_data.forEach(function(e) {
+                        var elem = el.clone();
+                        elem.find('#comment-li-link').attr("href", e.article+"#comments");
+                        elem.find('#comment-li-title').text(e.article_title);
+                        elem.find('#comment-li-date').text(Date.create(Math.min(Date.now(), (e.timestamp*1000)+servertime_diff)).relative(relative_custom, 'sv'));
+                        elem.find('#comment-li-author').text(e.author);
+                        container.append(elem);
+                    });
+                    box.fadeIn();
+                }
+            }).fail(function(x, str, y){
+                console.log('ajax error: '+y);
+            })
+        }
+</script>
+
+<div style="display: none;">
+    <li class="padded-sides" id="comment-li-element">
+        <a id="comment-li-link">
+        <div class="comflex" >
+            <span id="comment-li-title"> </span>
+        </div>
+        <div class="comflex grey">
+            <span class="small italic" id="comment-li-author"> </span>&nbsp;
+            <span class="noshrink small" id="comment-li-date"> </span>
+        </div>
+        </a>
+    </li>
+</div>
+
+<style>
+.comflex {
+        display: flex;
+        flex-direction: row;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px !important;
+    }
+
+    .comflex > .noshrink {
+        flex-shrink: 0 !important;
+    }
+
+    .comflex span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 10;
+    }
+    .twoline {
+        white-space: normal !important;
+        -webkit-line-clamp: 2;
+        max-lines: 2;
+        line-height: 15px;
+        max-height: 30px;
+    }
+    .italic {
+        font-style: italic;
+    }
+    .grey {
+        color: #777;
+    }
+    #comment-li-author {
+        margin-left: auto;
+    }
+</style>
+
+
+    <div class="uk-panel uk-panel-box" id="comments-latest-box" style="display: none;">
+        <ul class="uk-nav uk-nav-side" id="comments-latest-container">
+            <li class="uk-nav-header">Kommenterat på</li>
+
+        </ul>
+    </div>
+

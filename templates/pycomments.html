@@ -1,17 +1,179 @@
-<script src="/theme/sugar.min.js"></script>
 
-<div id="pycomments"><!-- comments! --></div>
-<script>
-	$.ajax( '{{ PYCOMMENTS_URL }}/comment/{{ article.url }}').success(function(data){
-		console.log(data);
-		var el = $('#pycomments');
-		data.forEach(function(val) {
-			if (val.author) {
-				el.append('<span>'+Date.create(val.timestamp*1000).relative()+', '+val.author+': '+ val.content+' </span><br>');
-			}
-		});
+<style>
 
-	}).error(function(x, str, y){
-		console.log('ajax error '+str);
-	})
-</script>
+    #showcomments, #pycomments {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .comment-wrap {
+        margin: 2px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .comment-wrap:nth-child(even) {
+        background-color: #fefefe;
+    }
+    .comment-wrap:nth-child(odd) {
+            background-color: #E9EFFE;
+    }
+    .comment-author {
+        font-style: italic;
+        font-size: smaller;
+        color: #777;
+    }
+
+    .comment-content {
+
+    }
+    .thick {
+        font-weight: bold;
+    }
+
+</style>
+<a name="comments"></a>
+<input id="showcomments" type="button" class="btn btn-success btn-medium" value="Skriv kommentar">
+
+<div id="pycomments" style="display: none"><!-- comments! --></div>
+<div id="pycomments-add" style="display: none">
+
+    <form id="comform" action="{{PYCOMMENTS_URL}}/add" method="post" class="form-horizontal" role="form" data-toggle="validator">
+
+        <div class="form-group">
+            <label class="col-sm-2 col-xs-12 control-label">
+                Ditt namn:
+            </label>
+            <div class="col-sm-6 col-xs-8">
+                <input class="form-control" type="text" name="author" id="author" required data-minlength="2" data-error="Skriv vad du heter!">
+            </div>
+             <div class="col-sm-4 col-xs-4"></div>
+            <div class="col-sm-offset-2 help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                Kommentar:
+            </label>
+            <div class="col-sm-10">
+                <textarea class="form-control" type="text" name="content" id="content" required data-minlength="3" data-error="Du måste ju skriva nåt här"></textarea>
+            </div>
+                <div class="col-sm-offset-2 help-block with-errors"></div>
+        </div>
+        <input type="hidden" name="article_title" id="article_title" value="{{ article.title }}">
+        <input type="hidden" name="article" id="article" value="{{ article.url }}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-4 col-xs-4">
+                <input type="submit" value="Skicka kommentar" class="btn btn-success btn-medium">
+                <!-- <input type="button" class="btn btn-success btn-medium" onclick="refresh()" value="ladda om">
+                <input type="button" class="btn btn-success btn-medium" onclick="rerender()" value="rendera om"> -->
+            </div>
+            <div class="col-sm-offset-2 help-block with-errors" id="servererror"></div>
+
+        </div>
+    </form>
+
+
+
+
+    <script>
+        var servertime_diff = 0;
+        var comments_data = [];
+
+        $(document).ready(function() {
+            clearForm();
+            $('#author').val( localStorage.getItem('author') );
+            $('#showcomments').click(function(e){
+                $('#showcomments').fadeOut();
+                $('#pycomments').fadeIn();
+                $('#pycomments-add').fadeIn();
+            });
+            get('{{ article.url }}');
+            if (location.hash == "#comments") {
+                console.log("oepn commens.")
+                $('#showcomments').click();
+            }
+        });
+
+        function relative_custom(value, unit, ms, loc) {
+              if(ms.abs() > (12).hour() && value == 1 && unit == 4) {
+                return 'i går';
+              }
+              if (ms.abs() < (1).minute()) {
+                return 'nyss';
+              }
+        }
+
+        function get(str) {
+            $.ajax( {url: '{{ PYCOMMENTS_URL }}/static/{{ article.url }}.json', cache:false}).done(function(data, stat, jqxhr){
+                var localtime = Date.now();
+                var servtime = Date.parse(jqxhr.getResponseHeader('Date'));
+                servertime_diff = localtime - servtime;
+                comments_data = data.filter(function(d){ return d.author && d.content && d.article == '{{article.url}}' });
+
+                if (comments_data.length) {
+                    $('#showcomments').val('Visa kommentarer ('+comments_data.length+')');
+                }
+                rerender();
+            }).fail(function(x, str, y){
+                console.log('ajax error: '+y);
+                if (x.status == 404) {
+                    $('#pycomments').text('Inga kommentarer än.')
+                }
+
+            })
+        }
+
+        //get comments from remote
+        function refresh() {
+            $('#pycomments').html('');
+            get( $('#article').val() );
+        }
+
+        //just update the html (for time lapsed)
+        function rerender() {
+            $('#pycomments').html('');
+             var el = $('#pycomments');
+                comments_data.forEach(function(val) {
+                    if (val.author) {
+                        el.append('<div class="comment-wrap"><div class="col-sm-offset-1 comment-author"><span class="thick">'+val.author+'</span> skrev '+
+                                Date.create(Math.min(Date.now(), (val.timestamp*1000)+servertime_diff)).relative(relative_custom, 'sv')+'</div><div class="col-sm-offset-2 comment-content">'+
+                                 val.content+' </div></div>');
+                    }
+                });
+        }
+
+        function clearForm() {
+            $('#content').val('');
+        }
+
+        $('#comform').validator().on('submit', function(e) {
+            if (e.isDefaultPrevented())
+                return;
+            var data = new FormData();
+            data.append('author', $('#author').val());
+            data.append('content', $('#content').val());
+            data.append('article', $('#article').val());
+            data.append('article_title', $('#article_title').val());
+            $.ajax({
+              url: '{{ PYCOMMENTS_URL }}/add',
+              data: data,
+              processData: false,
+              contentType: false,
+              type: 'POST'}).done(function(resdata){
+                console.log('success');
+                localStorage.setItem('author', $('#author').val());
+                clearForm();
+                refresh();
+                $('#servererror').text('');
+              }).fail(function(e, b, c) {
+                console.log('error'+c);
+                $('#servererror').text("Misslyckades tyvärr :(");
+
+              });
+
+            e.preventDefault();
+        });
+    </script>
+
+</div>

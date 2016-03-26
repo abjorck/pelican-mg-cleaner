@@ -32,6 +32,13 @@
 <link rel="stylesheet" href="/theme/css/main.css">
 <script src="/theme/jquery.min.js"></script>
 <script src="/theme/html5shiv.min.js"></script>
+<script src="{{SITEURL}}/theme/sugar.min.js"></script>
+<script src="{{SITEURL}}/theme/sugar.sv.js"></script>
+<link rel="stylesheet" href="{{SITEURL}}/theme/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{SITEURL}}/theme/bootstrap/css/bootstrap-theme.min.css">
+<script src="{{SITEURL}}/theme/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{SITEURL}}/theme/validator.min.js"></script>
+
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -69,8 +76,12 @@
                     <input class="uk-search-field tipue_search" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
                 </form>
             </div>
-
            {% endif %}
+
+            {% if PYCOMMENTS %}
+            {%   include 'pycomments_latest.html' %}
+            {% endif %}
+
             <div class="uk-panel uk-panel-box">
                 <ul class="uk-nav uk-nav-side">
                     <li class="uk-nav-header">Kategorier</li>

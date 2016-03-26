@@ -42,6 +42,13 @@
             {%   include 'gallery.html' %}
             {% endif %}
 
+
+
+            {% if PYCOMMENTS %}
+            {%   include 'pycomments.html' %}
+                <br>
+            {% endif %}
+
         {% if article.tags %}
 Taggar:
         {% for tag in article.tags %}
@@ -52,9 +59,6 @@ Taggar:
         {% endif %} 
 
 
-    {% if PYCOMMENTS %} 
-    {%   include 'pycomments.html' %}
-    {% endif %}
     
 	<hr class="uk-article-divider">
     </article>

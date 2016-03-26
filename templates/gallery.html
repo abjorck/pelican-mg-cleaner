@@ -16,12 +16,27 @@
             background-position: 50% 50%;
             width: 240px;
             height: 240px;
-            margin: 2px;    
+            margin: 2px;
+            position: relative;
         }
         @media (max-width: 767px) and (orientation: portrait) {
-        .galleryitem {
-            width: 140px;
-            height: 140px;
+            .galleryitem {
+                width: 140px;
+                height: 140px;
+            }
+        }
+
+        .itemcap {
+            text-align: center;
+            position: absolute;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            bottom: 0px;
+            width: 100%;
+            left: 0px;
+            color: rgb(204, 204, 204);
+            background-color: rgba(0, 0, 0, 0.5);
         }
     </style>
 
@@ -29,7 +44,12 @@
         {% for name, photo, thumb, exif, caption, size in article.photo_gallery %}
         
         <a href="javascript:openGallery({{ loop.index-1 }})" title="{{ name }}" exif="{{ exif }}" caption="{{ caption }}">
-            <div class="galleryitem" data-index="{{ loop.index }}" style="background-image: url('{{ SITEURL }}/{{ thumb }}')"></div>
+            <div class="galleryitem" data-index="{{ loop.index }}" style="background-image: url('{{ SITEURL }}/{{ thumb }}')">
+                {%  if caption %}
+                    <span class="itemcap">
+                        {{ caption }}</span>
+                {%  endif %}
+            </div>
         </a>
         {% endfor %}
     </div>
@@ -86,7 +106,7 @@
     <script>
             var slides = [];
             {% for name, photo, thumb, exif, caption, size in article.photo_gallery %}
-                slides.push({ src: '{{photo}}', msrc: '{{thumb}}', w: {{size[0]}}, h: {{size[1]}} });
+                slides.push({ src: '{{photo}}', msrc: '{{thumb}}', w: {{size[0]}}, h: {{size[1]}}, title: '{{ caption }}' });
             {% endfor %}
 
             var pswpElement = document.querySelectorAll('.pswp')[0];
