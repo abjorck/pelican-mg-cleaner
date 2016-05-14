@@ -33,7 +33,13 @@ var servertime_diff = 0;
                         elem.find('#comment-li-author').text(e.author);
                         container.append(elem);
                     });
-                    box.fadeIn();
+                    box.show(0);
+
+                    //do it again for mobile sidebar:
+                    var header = $('#pycomments-latest-mobile');
+                    comments_data.forEach(function(e) {
+                        header.after('<li><a href="'+ e.article+'#comments">'+ e.author+' @ '+ e.article_title+'</a></li>' );
+                    });
                 }
             }).fail(function(x, str, y){
                 console.log('ajax error: '+y);

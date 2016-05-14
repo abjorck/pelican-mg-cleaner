@@ -199,6 +199,11 @@
             {% endif %}
 
         <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+
+            {% if PYCOMMENTS %}
+                <li class="uk-nav-header" id="pycomments-latest-mobile">Kommenterat</li>
+            {% endif %}
+
             <li class="uk-nav-header">Topptaggar</li>
                {% for tag in tag_cloud %}
                    {%  if loop.index <= 6  %}
