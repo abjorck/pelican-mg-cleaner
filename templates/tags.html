@@ -6,8 +6,18 @@
 {% block content %}
 <div class="uk-width-medium-4-5">
     <h1 class="uk-heading-large">Taggar</h1>
-    {% for tag, articles in tags|sort %}
-    <h2><a href="{{ SITEURL }}/{{ tag.url }}" class="uk-link-muted">{{ tag.name }} ({{ articles|count }} st)</a></h2>
+<ul class="tagcloud">
+    {% for tag in tag_cloud %}
+        <li class="tag-{{ tag.1 }}">
+            <a href="{{ SITEURL }}/{{ tag.0.url }}">
+            {{ tag.0 }}
+                {% if TAG_CLOUD_BADGE %}
+                    <span class="badge">{{ tag.2 }}</span>
+                {% endif %}
+            </a>
+        </li>
     {% endfor %}
+</ul>
+
 </div>
 {% endblock %}

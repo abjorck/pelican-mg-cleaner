@@ -5,6 +5,31 @@ video {
   max-width: 100%;
   height: auto; }
 
+ul.tagcloud {
+  list-style: none;
+  padding: 0; }
+
+ul.tagcloud li {
+  display: inline-block; }
+
+li.tag-1 {
+  font-size: 200%; }
+
+li.tag-2 {
+  font-size: 160%; }
+
+li.tag-3 {
+  font-size: 130%; }
+
+li.tag-4 {
+  font-size: 110%; }
+
+li.tag-5 {
+  font-size: 95%; }
+
+li.tag-6, li.tag-7, li.tag-8 {
+  font-size: 80%; }
+
 #disqus_thread {
   padding-top: 40px; }
 
@@ -18,6 +43,11 @@ h2 {
   font-size: 18px;
   line-height: 24px;
   font-weight: 400; }
+
+.badge {
+  font-size: 80%;
+  vertical-align: top;
+  background-color: #BABABA; }
 
 .uk-article {
   padding-bottom: 30px; }
@@ -57,6 +87,13 @@ h2 {
 
 .uk-pagination > .uk-active > span {
   background: #586BFF; }
+
+.uk-pagination > .uk-active > a {
+  background: #586BFF; }
+
+.uk-pagination > li {
+  margin-bottom: 3px;
+  margin-left: 5px; }
 
 .uk-icon-medium {
   margin-right: 0.3em; }

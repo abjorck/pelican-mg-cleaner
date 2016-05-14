@@ -25,20 +25,25 @@
 <link href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed"/>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,800italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="/theme/uikit.min.css">
-<link rel="stylesheet" href="/theme/search.min.css">
-<link rel="stylesheet" href="/theme/css/tipuesearch.css">
-<link rel="stylesheet" href="/theme/css/solarized.css">
-<link rel="stylesheet" href="/theme/css/main.css">
+<link rel="stylesheet" href="{{SITEURL}}/theme/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{SITEURL}}/theme/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{{SITEURL}}/theme/uikit.min.css">
+<link rel="stylesheet" href="{{SITEURL}}/theme/search.min.css">
+<link rel="stylesheet" href="{{SITEURL}}/theme/css/tipuesearch.css">
+<link rel="stylesheet" href="{{SITEURL}}/theme/css/solarized.css">
+<link rel="stylesheet" href="{{SITEURL}}/theme/css/main.css">
 <script src="/theme/jquery.min.js"></script>
 <script src="/theme/html5shiv.min.js"></script>
 <script src="{{SITEURL}}/theme/sugar.min.js"></script>
 <script src="{{SITEURL}}/theme/sugar.sv.js"></script>
-<link rel="stylesheet" href="{{SITEURL}}/theme/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="{{SITEURL}}/theme/bootstrap/css/bootstrap-theme.min.css">
+
 <script src="{{SITEURL}}/theme/bootstrap/js/bootstrap.min.js"></script>
 <script src="{{SITEURL}}/theme/validator.min.js"></script>
-
+                           <style>
+                               .initially-hidden {
+                                   display: none;
+                               }
+                           </style>
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -84,6 +89,37 @@
 
             <div class="uk-panel uk-panel-box">
                 <ul class="uk-nav uk-nav-side">
+
+                    <li class="uk-nav-header">Taggar</li>
+                       {% for tag in tag_cloud %}
+                           {%  if loop.index <= 8  %}
+                            <li>
+                                <a href="{{ SITEURL }}/{{ tag.0.url }}">
+                                {{ tag.0 | lower }}
+                                    {% if TAG_CLOUD_BADGE %}
+                                        <span class="badge">{{ tag.2 }}</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                           {%  endif %}
+                        {% endfor %}
+                        {%  if tag_cloud|count > 8 %}
+
+                            <li id="hide-clicked" style="cursor: hand;"><a><i>Fler taggar...</i></a></li>
+                            {% for tag in tag_cloud %}
+                               {%  if loop.index > 8  %}
+                                <li class="initially-hidden">
+                                    <a href="{{ SITEURL }}/{{ tag.0.url }}">
+                                    {{ tag.0 | lower }}
+                                        {% if TAG_CLOUD_BADGE %}
+                                            <span class="badge">{{ tag.2 }}</span>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                               {%  endif %}
+                            {% endfor %}
+                        {% endif %}
+
                     <li class="uk-nav-header">Kategorier</li>
                     {% for cat, _ in categories %}
                     <li {% if cat == category %}class="uk-active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
@@ -148,15 +184,36 @@
     </div> 
 </footer>
 
+
+<ul class="tagcloud">
+
+</ul>
+
+
 <div id="mg-offcanvas" class="uk-offcanvas">
     <div class="uk-offcanvas-bar">
             {% if DISPLAY_SEARCH != False %}
-
         <form class="uk-search" action="search.html" data-uk-search>
             <input class="uk-search-field" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
         </form>
-
             {% endif %}
+
+        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+            <li class="uk-nav-header">Topptaggar</li>
+               {% for tag in tag_cloud %}
+                   {%  if loop.index <= 6  %}
+                    <li>
+                        <a href="{{ SITEURL }}/{{ tag.0.url }}">
+                        {{ tag.0|lower }}
+                            {% if TAG_CLOUD_BADGE %}
+                                <!-- <span class="badge">{{ tag.2 }}</span> -->
+                            {% endif %}
+                        </a>
+                    </li>
+                   {%  endif %}
+                {% endfor %}
+        </ul>
+
         <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
             <li class="uk-nav-header">Kategorier</li>
             {% for cat, _ in categories %}
@@ -179,7 +236,13 @@
 </div>
 
 
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script>
+    $('#hide-clicked').click( function() {
+        $('#hide-clicked').hide();
+        $('.initially-hidden').show(0);
+    });
+
+</script>
 <script src="/theme/uikit.min.js"></script>
 <script src="/theme/search.min.js"></script>
 <script src="/theme/js/jquery.sticky-kit.js"></script>
